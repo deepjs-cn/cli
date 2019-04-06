@@ -1,0 +1,27 @@
+{
+  "version": "0.0.0",
+  "packages": [
+    "packages/@deepjs/*",
+    "packages/cli-version-marker"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        ".npmignore",
+        "__test__",
+        "*.test.js"
+      ]
+    },
+    "bootstrap": {
+      "ignore": "*.test.js",
+      "npmClientArgs": [
+        "--production",
+        "--no-optional",
+        "--no-package-lock"
+      ]
+    }
+  }
+}

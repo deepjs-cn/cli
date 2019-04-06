@@ -1,0 +1,29 @@
+src
+__tests__/*
+benchmark/*
+coverage/*
+node_modules
+babel.config.js
+tempCodeRunnerFile.js
+
+.browserslistrc
+.eslintignore
+.npmignore
+.editorconfig
+.eslintrc.js
+.gitignore
+
+# README.md
+babel.config.js
+# package.json
+yarn.lock
+
+aliapp
+wxapp
+test
+scripts
+temp
+design.md
+circle.yml
+LICENSE
+mockMini.js
