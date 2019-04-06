@@ -9,9 +9,10 @@
 - 多人协作更为方便，不需要把文件传来传去。
 
 - 使用（参考 @vue/cli）
-  - [ ] 支持初始化新项目 `jscli create <template> <name>`
-  - [ ] 支持项目内添加组件、模块、页面 `jscli add <template> <name>`
-  - [ ] 创建或添加时，支持交互式的生成
+  - [x] 支持初始化新项目 `jscli create <template> <name>`
+  - [x] 支持项目内添加组件、模块、页面（同 create）`jscli add <template> <name>`
+    - [ ] 附加项目检测，目录校验
+  - [x] 创建或添加时，支持交互式的生成
 - 模板管理（参考 npm config & nrm 的形式）
   - [x] 支持提供官方模板列表
   - [x] 支持添加自定义模板，使用配置 `~/.jsclirc`

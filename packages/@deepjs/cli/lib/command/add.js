@@ -5,8 +5,9 @@ const inquirer = require('inquirer')
 const ora = require('ora');
 const symbols = require('log-symbols');
 
+const generate = require('../generate');
 const { getAllTpls } = require('../../config');
-const {exit, checkTpls, printErr, down } = require('../utils');
+const { exit, checkTpls, printErr, isExist, down, isLocalPath, getTemplatePath } = require('../utils');
 
 // const home = require('user-home')
 // let template = program.args[0]
@@ -16,8 +17,17 @@ const {exit, checkTpls, printErr, down } = require('../utils');
 //   template = tmp
 // }
 
+// const isExist = fs.existsSync;
+
 async function add(template, projectName, options) {
   // templatePath = path.resolve('../tpls', template);
+  if (isLocalPath(template)) {
+    const templatePath = getTemplatePath(template);
+    console.log(`  暂还未支持本地路径 ${chalk.red(template)}`);
+    console.log(`  ${templatePath}`)
+    if (!isExist(templatePath)) return;
+    return;
+  }
   const tpls = getAllTpls();
   const tpl = tpls[template];
   if (!tpl) {
@@ -31,7 +41,7 @@ async function add(template, projectName, options) {
     return;
   }
   // templatePath = `@xmini/${template}`;
-  // if (fs.existsSync(templatePath)) {
+  // if (isExist(templatePath)) {
   //   console.error(`${templatePath} must be isExist`);
   // }
   const cwd = options.cwd || process.cwd();
@@ -40,7 +50,9 @@ async function add(template, projectName, options) {
   // 转为系统绝对地址
   const targetDir = path.resolve(cwd, projectName || '.');
 
-  if (fs.existsSync(targetDir)) {
+  const tmp = path.join(process.env.HOME, '.jscli-templates', template.replace(/[\/:]/g, '-'))
+
+  if (isExist(targetDir)) {
       // await clearConsole()
     if (inCurrent) {
       const { ok } = await inquirer.prompt([
@@ -97,12 +109,22 @@ async function add(template, projectName, options) {
 
   const download = down(type);
 
-  await download(templatePath, targetDir);
+  // 先将代码下载到临时目录里
+  await download(templatePath, tmp);
 
   spinner.succeed();
 
+  // jscli create pwa ttt;
+  // ttt /Users/dwd/.jscli-templates/pwa /Users/dwd/github/cloudyan/cli/packages/@deepjs/cli/ttt
+  // 从临时目录生成目标代码
+  generate(name, tmp, targetDir, err => {
+    if (err) exit(err)
+    console.log()
+    console.log('  Generated "%s".', name)
+  })
+
   const fileName = `${targetDir}/package.json`;
-  if (fs.existsSync(fileName)) {
+  if (isExist(fileName)) {
     const packageFile = require(fileName);
     // 修改本地项目中package.json中的name为项目名称
     packageFile.name = name;
