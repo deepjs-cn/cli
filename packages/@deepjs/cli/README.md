@@ -15,7 +15,7 @@
     - [x] 提示输出添加位置（相对路径）
   - [x] 创建或添加时，支持交互式的生成
   - [ ] 升级检测？对当前应用进行检测提示升级
-- 模板管理（参考 npm config & nrm 的形式）
+- 模板管理（参考 npm config & nrm 的形式，此处实现有误，最佳实现应该使用[Git 风格的子命令](https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md#git-%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%AD%90%E5%91%BD%E4%BB%A4)）
   - [x] 支持提供官方模板列表
   - [x] 支持添加自定义模板，使用配置 `~/.jsclirc`
   - [x] 查看模板列表 `jscli tpls ls [--json]`
