@@ -4,7 +4,5 @@
   "description": "version marker for @deepjs/cli",
   "author": "@deepjs",
   "license": "MIT",
-  "main": "package.json",
-  "devDependencies": {
-  }
+  "main": "package.json"
 }
