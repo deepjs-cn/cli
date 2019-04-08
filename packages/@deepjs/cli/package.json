@@ -1,10 +1,10 @@
 {
   "name": "@deepjs/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Command line interface for rapid js development",
   "main": "lib/index.js",
   "publishConfig": {
-    "registry": "http://maven.doweidu.com/repository/npm-hosted/"
+    "access": "public"
   },
   "bin": {
     "jscli": "./bin/jscli.js",
@@ -32,9 +32,6 @@
     "url": "https://github.com/deepjs-cn/cli/issues"
   },
   "homepage": "https://github.com/deepjs-cn/cli#readme",
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "async": "^2.6.2",
     "chalk": "^2.4.2",
