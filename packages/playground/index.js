@@ -3,7 +3,7 @@
 const program = require('commander');
 const getRegistryInfo = require('registry-info');
 
-console.log()
+console.log();
 
 function range(val) {
   return val.split('..').map(Number);
@@ -31,7 +31,12 @@ program
   .option('-l, --list <items>', 'A list', list)
   .option('-o, --optional [value]', 'An optional value')
   .option('-c, --collect [value]', 'A repeatable value', collect, [])
-  .option('-v, --verbose', 'A value that can be increased', increaseVerbosity, 0)
+  .option(
+    '-v, --verbose',
+    'A value that can be increased',
+    increaseVerbosity,
+    0
+  )
   .parse(process.argv);
 
 console.log(' int: %j', program.integer);
@@ -44,5 +49,6 @@ console.log(' collect: %j', program.collect);
 console.log(' verbosity: %j', program.verbose);
 console.log(' args: %j', program.args);
 
+console.log(getRegistryInfo);
 
 // node index.js -i 1.2 -f 1.2 -r 1..2 -l a,b -o hehe -c heihei -v zeze
