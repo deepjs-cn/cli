@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "Command line interface for rapid js development",
   "main": "lib/index.js",
+  "publishConfig": {
+    "registry": "http://maven.doweidu.com/repository/npm-hosted/"
+  },
   "bin": {
     "jscli": "./bin/jscli.js",
     "js": "./bin/jscli.js"
@@ -87,5 +90,5 @@
     "@babel/preset-env": "^7.4.3",
     "babel-plugin-add-module-exports": "^1.0.0"
   },
-  "gitHead": "8a283dad99093e3171ac96ad05df193f6b93a143"
+  "gitHead": "ee56b2698a359d6dde6a454d71d5b869737e63fb"
 }

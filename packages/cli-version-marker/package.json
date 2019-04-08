@@ -2,8 +2,11 @@
   "name": "cli-version-marker",
   "version": "0.0.2",
   "description": "version marker for @deepjs/cli",
+  "main": "package.json",
+  "publishConfig": {
+    "registry": "http://maven.doweidu.com/repository/npm-hosted/"
+  },
   "author": "@deepjs",
   "license": "MIT",
-  "main": "package.json",
-  "gitHead": "8a283dad99093e3171ac96ad05df193f6b93a143"
+  "gitHead": "ee56b2698a359d6dde6a454d71d5b869737e63fb"
 }
