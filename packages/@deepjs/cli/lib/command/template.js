@@ -134,5 +134,5 @@ function list(useJSON) {
 function errTip(tip) {
   console.error(tip)
   console.log()
-  console.log(`  Run ${chalk.cyan(`jscli tpl --help`)} for detailed usage of given command.`)
+  console.log(`  Run ${chalk.cyan(`jscli tpls --help`)} for detailed usage of given command.`)
 }

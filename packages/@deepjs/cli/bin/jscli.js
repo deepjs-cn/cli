@@ -99,15 +99,15 @@ program
 
 program
   // jscli template [options...]
-  .command('tpl <action> [key] [value]')
+  .command('tpls <action> [key] [value]')
   .alias('template')
   .usage(
     `
-  jscli tpl list                           List all the templates
-  jscli tpl add <key> <value>              Add one custom template
-  jscli tpl del <key>                      Delete one custom template
-  jscli tpl edit                           Open custom template with default editor
-  jscli tpl check                          Check the validity of custom template data
+  jscli tpls list                          List all the templates
+  jscli tpls add <key> <value>             Add one custom template
+  jscli tpls del <key>                     Delete one custom template
+  jscli tpls edit                          Open custom template with default editor
+  jscli tpls check                         Check the validity of custom template data
   `
   )
   .description('Manage the template. action -> [ls add del edit...]')
