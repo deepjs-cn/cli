@@ -1,13 +1,15 @@
-const fs = require('fs')
-const path = require('path')
-const ini = require('ini')
+const fs = require('fs');
+const path = require('path');
+const ini = require('ini');
 const echo = require('node-echo');
 const { templates } = require('./templates');
 
 // const homedir = require('os').homedir()
 // homedir vs process.env.HOME
 const JSCLIRC = path.join(process.env.HOME, '.jsclirc');
+const JSCLITMP = path.join(process.env.HOME, '.jscli-templates');
 
+exports.JSCLITMP = JSCLITMP;
 exports.JSCLIRC = JSCLIRC;
 exports.templates = templates;
 exports.getAllTpls = getAllTpls;
@@ -29,7 +31,9 @@ function getOfficialTpl() {
 }
 
 function getCustomTpl() {
-  return fs.existsSync(JSCLIRC) ? ini.parse(fs.readFileSync(JSCLIRC, 'utf-8')) : {};
+  return fs.existsSync(JSCLIRC)
+    ? ini.parse(fs.readFileSync(JSCLIRC, 'utf-8'))
+    : {};
 }
 
 function setCustomTpl(config, cbk) {

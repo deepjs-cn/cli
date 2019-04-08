@@ -6,8 +6,8 @@ const ora = require('ora');
 const symbols = require('log-symbols');
 
 const generate = require('../generate');
-const { getAllTpls } = require('../../config');
-const { exit, checkTpls, printErr, isExist, down, isLocalPath, getTemplatePath } = require('../utils');
+const { getAllTpls, JSCLITMP } = require('../../config');
+const { sleep, exit, checkTpls, printErr, isExist, down, isLocalPath, getTemplatePath } = require('../utils');
 
 // const home = require('user-home')
 // let template = program.args[0]
@@ -48,9 +48,43 @@ async function add(template, projectName, options) {
   const inCurrent = projectName === '.';
   const name = inCurrent ? path.relative('../', cwd) : projectName;
   // 转为系统绝对地址
-  const targetDir = path.resolve(cwd, projectName || '.');
+  let targetDir = path.resolve(cwd, projectName || '.');
 
-  const tmp = path.join(process.env.HOME, '.jscli-templates', template.replace(/[\/:]/g, '-'))
+  const tmp = path.join(JSCLITMP, template.replace(/[\/:]/g, '-'))
+
+  // 附加项
+  // 二次确认 targetDir，选择添加组件或页面的位置（相对于当前目录）
+  async function confirmDir() {
+    const { ok } = await inquirer.prompt([
+      {
+        name: 'ok',
+        type: 'confirm',
+        message: `Confirm to add to the directory: \n  ${chalk.cyan(targetDir)}`
+      }
+    ]);
+    console.log();
+    if (!ok) {
+      const { dir } = await inquirer.prompt([
+        {
+          name: 'dir',
+          type: 'input',
+          message: `Please input the generate dirname:`
+        }
+      ]);
+      targetDir = path.resolve(cwd, dir || '.');
+      console.log();
+      console.log('You input:')
+      console.log(`${chalk.cyan(targetDir)}`);
+    };
+  }
+
+  await confirmDir();
+
+  console.log();
+  console.log('You can cancel by input `Ctrl + c`.');
+  console.log();
+
+  await sleep(5000);
 
   if (isExist(targetDir)) {
       // await clearConsole()
@@ -93,8 +127,10 @@ async function add(template, projectName, options) {
   // template = '@tpls/wxapp'
   // const template = 'direct:https://github.com/ChangedenCZD/optimize-vue.git#master';
 
-  const spinner = ora('Get ready template...')
+  const spinner = ora('Get ready template...');
+
   spinner.start()
+
   // if (/^https/.test(templatePath)) {
   //   await download(templatePath, targetDir, { clone: true }, err => {
   //     spinner.stop()
@@ -131,6 +167,7 @@ async function add(template, projectName, options) {
     fs.writeFileSync(fileName, JSON.stringify(packageFile, null, 2));
   }
   console.log(symbols.success, chalk.green('Generate project success.'));
+  console.log();
 }
 
 module.exports = (...args) => {

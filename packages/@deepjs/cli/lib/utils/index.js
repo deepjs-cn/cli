@@ -1,4 +1,4 @@
-const { cleanArgs, printList, printErr, line, exit, isExist } = require('./util');
+const { cleanArgs, printList, printErr, line, exit, isExist, sleep } = require('./util');
 const { isLocalPath, getTemplatePath } = require('./localPath');
 const { down, downNpm, downGit, downLocal } = require('./down');
 const { checkTpl, checkTpls } = require('./check');
@@ -9,6 +9,7 @@ exports.printList = printList;
 exports.printErr = printErr;
 exports.exit = exit;
 exports.line = line;
+exports.sleep = sleep;
 exports.isExist = isExist;
 
 exports.isLocalPath = isLocalPath;

@@ -6,7 +6,7 @@ const ora = require('ora');
 const symbols = require('log-symbols');
 
 const generate = require('../generate');
-const { getAllTpls } = require('../../config');
+const { getAllTpls, JSCLITMP } = require('../../config');
 const { exit, checkTpls, printErr, isExist, down, isLocalPath, getTemplatePath } = require('../utils');
 
 // const home = require('user-home')
@@ -50,7 +50,7 @@ async function create(template, projectName, options) {
   // 转为系统绝对地址
   const targetDir = path.resolve(cwd, projectName || '.');
 
-  const tmp = path.join(process.env.HOME, '.jscli-templates', template.replace(/[\/:]/g, '-'))
+  const tmp = path.join(JSCLITMP, template.replace(/[\/:]/g, '-'))
 
   if (isExist(targetDir)) {
       // await clearConsole()
@@ -94,7 +94,9 @@ async function create(template, projectName, options) {
   // const template = 'direct:https://github.com/ChangedenCZD/optimize-vue.git#master';
 
   const spinner = ora('Get ready template...')
+
   spinner.start()
+
   // if (/^https/.test(templatePath)) {
   //   await download(templatePath, targetDir, { clone: true }, err => {
   //     spinner.stop()
@@ -131,6 +133,7 @@ async function create(template, projectName, options) {
     fs.writeFileSync(fileName, JSON.stringify(packageFile, null, 2));
   }
   console.log(symbols.success, chalk.green('Generate project success.'));
+  console.log();
 }
 
 module.exports = (...args) => {

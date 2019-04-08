@@ -6,8 +6,17 @@ exports.printErr = printErr;
 exports.exit = exit;
 exports.line = line;
 exports.isObject = isObject;
+exports.sleep = sleep;
 
 exports.isExist = fs.existsSync;
+
+function sleep(timeout) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
+}
 
 function isObject(v) {
   return v !== null && typeof v === 'object' && Array.isArray(v) === false;

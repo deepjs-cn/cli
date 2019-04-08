@@ -1,8 +1,12 @@
+const path = require('path');
 const fs = require('fs-extra')
 const downloadNpmPackage = require('download-npm-package');
 const downloadGitRepo = require('download-git-repo');
-const { exit, isExist } = require('./util');
+const npa = require("npm-package-arg")
 const rm = require('rimraf').sync;
+const exec = require('child_process').execSync;
+const { exit, isExist } = require('./util');
+const { JSCLITMP } = require('../../config');
 // const isExist = fs.existsSync;
 
 // 目前这个是直接拉代码到指定目录，但我们要的不仅仅是这个效果，我们要特殊处理
@@ -23,12 +27,50 @@ exports.down = type => {
 
 // check if template is local
 async function downNpm(template, tmp) {
-  if (isExist(tmp)) rm(tmp);
+  if (isExist(tmp)) fs.removeSync(tmp);
+  // if (isExist(tmp)) {
+  //   console.log(2222)
+  //   console.log(tmp);
+  //   // rm(tmp);
+  //   fs.removeSync(tmp);
+  //   console.log(isExist(tmp));
+  // }
   // template = '@tpls/wxapp'
   await downloadNpmPackage({
     arg: template, // for example, npm@2 or @mic/version@latest etc
     dir: tmp, // package will be downlodaded to ${dir}/packageName
   });
+
+  // 对下载的 npm 包，需要处理文件夹结构
+  try {
+    const parsed = npa(template);
+    /**
+     * {
+        raw: '@tpls/wxapp',
+        scope: '@tpls',
+        escapedName: '@tpls%2fwxapp',
+        name: '@tpls/wxapp',
+        rawSpec: '',
+        spec: 'latest',
+        type: 'tag'
+      }
+     * */
+
+    const src = path.join(tmp, parsed.name);
+    const dest = tmp;
+
+    // console.log(1111);
+    // console.log(src);
+    // console.log(dest);
+
+    try {
+      fs.copySync(src, dest, { overwrite: true });
+      fs.removeSync(src);
+      // exec(`git config --get user.name`);
+    } catch (e) {}
+  } catch (err) {
+    exit(err)
+  }
 }
 
 async function downGit(url, tmp) {
