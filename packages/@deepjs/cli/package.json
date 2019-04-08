@@ -86,5 +86,6 @@
     "@babel/plugin-transform-template-literals": "^7.2.0",
     "@babel/preset-env": "^7.4.3",
     "babel-plugin-add-module-exports": "^1.0.0"
-  }
+  },
+  "gitHead": "8a283dad99093e3171ac96ad05df193f6b93a143"
 }
