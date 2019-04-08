@@ -18,11 +18,11 @@
 - 模板管理（参考 npm config & nrm 的形式）
   - [x] 支持提供官方模板列表
   - [x] 支持添加自定义模板，使用配置 `~/.jsclirc`
-  - [x] 查看模板列表 `jscli tpl ls [--json]`
-  - [x] 添加模板 `jscli tpl add <key> <value>`
-  - [x] 删除模板 `jscli tpl del <key>`
-  - [x] 编辑模板 `jscli tpl edit`，调用默认编辑器编辑(也可以考虑使用 VIM)
-  - [x] 校验模板数据有效性 `jscli tpl check`
+  - [x] 查看模板列表 `jscli tpls ls [--json]`
+  - [x] 添加模板 `jscli tpls add <key> <value>`
+  - [x] 删除模板 `jscli tpls del <key>`
+  - [x] 编辑模板 `jscli tpls edit`，调用默认编辑器编辑(也可以考虑使用 VIM)
+  - [x] 校验模板数据有效性 `jscli tpls check`
 
 参考：
 
